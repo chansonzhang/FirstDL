@@ -17,7 +17,7 @@
 # @Time    : 12/24/2018 10:45
 # @Author  : Zhang, Chen (chansonzhang)
 # @Email   : ZhangChen.Shaanxi@gmail.com
-# @FileName: Utils.py
+# @FileName: utils.py
 import numpy as np
 def sigmoid(z):
     return 1.0/(1+np.exp(-z))

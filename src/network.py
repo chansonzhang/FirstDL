@@ -20,7 +20,7 @@
 # @FileName: network.py
 
 import numpy as np
-from Utils import sigmoid,sigmoid_prime
+from src.utils import sigmoid,sigmoid_prime
 import random
 
 class Network(object):
@@ -28,13 +28,13 @@ class Network(object):
     def __init__(self, sizes):
         self.sizes = sizes
         self.num_layers = len(sizes)
-        self.bias = [np.random.randn(y, 1)
+        self.biases = [np.random.randn(y, 1)
                      for y in sizes[1:]]
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
 
     def feedforward(self,a):
-        for w,b in zip(self.weights,self.bias):
+        for w,b in zip(self.weights,self.biases):
             a=sigmoid(np.dot(w,a)+b)
         return a
 
