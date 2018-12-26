@@ -14,22 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-# @Time    : 12/25/2018 11:08
+# @Time    : 12/26/2018 16:49
 # @Author  : Zhang, Chen (chansonzhang)
 # @Email   : ZhangChen.Shaanxi@gmail.com
-# @FileName: test.py
+# @FileName: test_numpy.py
 
+import  numpy as np
+A= np.array([[1,2],
+             [3,4]])
+B= np.array([[5,6],
+             [7,8]])
+print(np.einsum('ij,jk',A,B))
+print(np.einsum('ij,jk->k',A,B))
+print(A.sum(0))
 
-import mnist_loader
-import network
-# notice! y in training_data is a one hot vector, but y in test_data is a single number
-# this may lead to some differences in training code and evaluation code
-training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-net = network.Network([784, 30, 10])
-net.SGD(list(training_data), 30, 10, 3.0, test_data=list(test_data))
-
-
-
-
-
-
+b=np.array([[1],
+            [2]])
+print(b.shape)
+print(b)
+nb=np.array([3,4])
+print(nb.shape)
+print(nb)
+c=b*nb
+print(c.shape)
+print(c)
