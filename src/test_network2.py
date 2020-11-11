@@ -14,30 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-# @Time    : 12/26/2018 16:49
+# @Time    : 1/13/2019 21:52
 # @Author  : Zhang, Chen (chansonzhang)
 # @Email   : ZhangChen.Shaanxi@gmail.com
-# @FileName: test_numpy.py
+# @FileName: test_network2.py.py
 
-import  numpy as np
-from utils import sigmoid
-A= np.array([[1,2],
-             [3,4]])
-B= np.array([[5,6],
-             [7,8]])
-print(np.einsum('ij,jk',A,B))
-print(np.einsum('ij,jk->k',A,B))
-print(A.sum(0))
-
-b=np.array([[1],
-            [2]])
-print(b.shape)
-print(b)
-nb=np.array([3,4])
-print(nb.shape)
-print(nb)
-c=b*nb
-print(c.shape)
-print(c)
-
-print(sigmoid(-2.26))
+import mnist_loader
+import network2
+# notice! y in training_data is a one hot vector, but y in test_data is a single number
+# this may lead to some differences in training code and evaluation code
+training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+net = network2.Network([784, 30, 10],cost=network2.CrossEntropyCost)
+net.large_weight_initializer()
+net.SGD(list(training_data), 30, 10, 0.5, evaluation_data=list(test_data), monitor_evaluation_accuracy=True)

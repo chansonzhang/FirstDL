@@ -14,30 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-# @Time    : 12/26/2018 16:49
+# @Time    : 3/12/2019 20:18
 # @Author  : Zhang, Chen (chansonzhang)
 # @Email   : ZhangChen.Shaanxi@gmail.com
-# @FileName: test_numpy.py
-
-import  numpy as np
-from utils import sigmoid
-A= np.array([[1,2],
-             [3,4]])
-B= np.array([[5,6],
-             [7,8]])
-print(np.einsum('ij,jk',A,B))
-print(np.einsum('ij,jk->k',A,B))
-print(A.sum(0))
-
-b=np.array([[1],
-            [2]])
-print(b.shape)
-print(b)
-nb=np.array([3,4])
-print(nb.shape)
-print(nb)
-c=b*nb
-print(c.shape)
-print(c)
-
-print(sigmoid(-2.26))
+# @FileName: test_network3.py
+import network3
+from network3 import Network
+from network3 import ConvPoolLayer, FullyConnectedLayer, SoftmaxLayer
+training_data, validation_data, test_data = network3.load_data_shared()
+mini_batch_size = 10
+net = Network([
+        FullyConnectedLayer(n_in=784, n_out=100),
+        SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
+net.SGD(training_data, 60, mini_batch_size, 0.1,
+            validation_data, test_data)
